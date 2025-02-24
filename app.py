@@ -50,7 +50,7 @@ def compute_doc_embeddings(corpus_sentences, _model):
     
     return np.array([compute_avg_embedding(doc) for doc in corpus_sentences])
 
-doc_embeddings = compute_doc_embeddings(corpus_sentences, _model)
+doc_embeddings = compute_doc_embeddings(corpus_sentences, model)
 st.write("Document embeddings computed.")
 
 # Query Processing
