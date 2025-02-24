@@ -1,0 +1,6 @@
+streamlit
+nltk
+gensim
+scikit-learn
+matplotlib
+numpy
