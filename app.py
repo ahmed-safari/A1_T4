@@ -11,6 +11,7 @@ from sklearn.manifold import TSNE
 # Download necessary resources
 nltk.download('reuters')
 nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 
 # Streamlit Title
