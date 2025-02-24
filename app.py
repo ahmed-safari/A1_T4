@@ -41,28 +41,28 @@ model = train_word2vec(corpus_sentences)
 
 # Compute Document Embeddings
 @st.cache_data
-def compute_doc_embeddings(corpus_sentences, model):
+def compute_doc_embeddings(corpus_sentences, _model):
     def compute_avg_embedding(words):
-        valid_words = [word for word in words if word in model.wv]
+        valid_words = [word for word in words if word in _model.wv]
         if not valid_words:
-            return np.zeros(model.vector_size)
-        return np.mean([model.wv[word] for word in valid_words], axis=0)
+            return np.zeros(_model.vector_size)
+        return np.mean([_model.wv[word] for word in valid_words], axis=0)
     
     return np.array([compute_avg_embedding(doc) for doc in corpus_sentences])
 
-doc_embeddings = compute_doc_embeddings(corpus_sentences, model)
+doc_embeddings = compute_doc_embeddings(corpus_sentences, _model)
 st.write("Document embeddings computed.")
 
 # Query Processing
-def process_query(query, model):
+def process_query(query, _model):
     tokens = [word for word in word_tokenize(query.lower()) if word.isalnum()]
-    return compute_avg_embedding(tokens, model)
+    return compute_avg_embedding(tokens, _model)
 
-def compute_avg_embedding(words, model):
-    valid_words = [word for word in words if word in model.wv]
+def compute_avg_embedding(words, _model):
+    valid_words = [word for word in words if word in _model.wv]
     if not valid_words:
-        return np.zeros(model.vector_size)
-    return np.mean([model.wv[word] for word in valid_words], axis=0)
+        return np.zeros(_model.vector_size)
+    return np.mean([_model.wv[word] for word in valid_words], axis=0)
 
 # Retrieve Top-k Documents
 def retrieve_top_k(query_embedding, doc_embeddings, documents, k=5):
